@@ -16,6 +16,8 @@ app = Flask(__name__)
 CORS(app,supports_credentials=True)
 
 # 导入处理Excel成JSON的蓝图
-from router.ExcelToJSON import ExcelToJSON_bp
-
+from router.ExcelToJSON_router import ExcelToJSON_bp
+from router.MongoDB_router import mongoDB_bp
 app.register_blueprint(ExcelToJSON_bp)
+app.register_blueprint(mongoDB_bp)
+

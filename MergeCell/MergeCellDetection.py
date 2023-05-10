@@ -9,16 +9,7 @@
 import os
 import openpyxl
 import pandas as pd
-from data._init_ import DataPath
-
-excels = ['专家经验树.xlsx', '文本挖掘树_.xlsx', "机器学习特征树_.xlsx", '融合树_.xlsx']
-
-path = os.path.join(DataPath, excels[0])
-# 读取 Excel 文件
-# df = pd.read_excel(path)
-# df = pd.read_excel(path, engine='openpyxl')
-# 读取 Excel 文件
-workbook = openpyxl.load_workbook(path)
+from data import DataPath
 
 
 def is_merged_cell(cell):
@@ -29,22 +20,38 @@ def is_merged_cell(cell):
         return True
     return False
 
-# 遍历所有工作表
-for sheet_name in workbook.sheetnames:
-    sheet = workbook[sheet_name]
-    df = pd.DataFrame(sheet.values)
-    merged_cells = sheet.merged_cells
 
-    # 遍历所有单元格
-    for index, row in df.iterrows():
-        for column in df.columns:
-            cell_value = row[column]
-            cell = sheet.cell(row=index+1, column=column+1)
-            if pd.isna(cell_value):
-                print(f"空单元格：({index+1}, {column+1})")
-            elif is_merged_cell(cell) and cell.coordinate in merged_cells:
-                print(f"合并单元格：({index+1}, {column+1}),值为：{cell_value}")
-            else:
-                print(f"非空单元格：({index+1}, {column+1})，值为：{cell_value}")
-# 输出处理后的DataFrame
-print(df)
+def HasMergedCell(path):
+    IsMerged=False
+    workbook = openpyxl.load_workbook(path)
+    # 遍历所有工作表
+    for sheet_name in workbook.sheetnames:
+        sheet = workbook[sheet_name]
+        df = pd.DataFrame(sheet.values)
+        merged_cells = sheet.merged_cells
+
+        # 遍历所有单元格
+        for index, row in df.iterrows():
+            for column in df.columns:
+                cell_value = row[column]
+                cell = sheet.cell(row=index + 1, column=column + 1)
+                if is_merged_cell(cell) and cell.coordinate in merged_cells:
+                    # print(f"合并单元格：({index + 1}, {column + 1}),值为：{cell_value}")
+                    IsMerged = True
+                # if pd.isna(cell_value):
+                #     print(f"空单元格：({index + 1}, {column + 1})")
+                # elif is_merged_cell(cell) and cell.coordinate in merged_cells:
+                #     print(f"合并单元格：({index + 1}, {column + 1}),值为：{cell_value}")
+                #     IsMerged=True
+                # else:
+                #     print(f"非空单元格：({index + 1}, {column + 1})，值为：{cell_value}")
+    # 输出处理后的DataFrame
+    return IsMerged
+
+
+if __name__ == '__main__':
+    excels = ['专家经验树.xlsx', '文本挖掘树_.xlsx', "机器学习特征树_.xlsx", '融合树_.xlsx']
+
+    path = os.path.join(DataPath, excels[0])
+    HasMergedCell(path)
+

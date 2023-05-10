@@ -9,7 +9,7 @@
 import pandas as pd
 from pymongo import MongoClient
 
-from data._init_ import DataBase as DB
+from data import DataBase as DB
 
 
 def InsertMongoDB(insertData):

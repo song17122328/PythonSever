@@ -2,7 +2,7 @@
 """
 @Intorduce：负责把excel文件转成JSON的flask蓝图，里面有一些路由处理
 @Project ：PythonSever 
-@File ：ExcelToJSON.py
+@File ：ExcelToJSON_router.py
 @Author ：小小小松
 @Date ：2023/5/1 13:51
 """
@@ -11,23 +11,29 @@ import json
 import pandas as pd
 from flask import Blueprint, request, jsonify
 
-from ExcelProcess.NestedTree_ExcelToJSON import ReadExcelAndReturnJSON
+import ExcelProcess.NestedTree_ExcelToJSON as NestedTree
+import ExcelProcess.Info_ExcelToJSON as Info
+import MergeCell.MergeCellDetection as Detection
+import MergeCell.MergeCellSplit as Split
 
-ExcelToJSON_bp = Blueprint('ExcelToJSON', __name__)
+ExcelToJSON_bp = Blueprint('ExcelToJSON_BP', __name__)
 
 
 # POST请求接受excel，Excel为嵌套的描述符树，把Excel转成嵌套的JSON数据
 @ExcelToJSON_bp.route('/TreeStruct', methods=['POST'])
 def PostTreeStructToJSON():
     excel = request.files['file']
-    JSON = ReadExcelAndReturnJSON(excel)
-    return JSON
+    # 检测是否有合并单元格
+    if Detection.HasMergedCell(excel):
+        # 若有合并单元格，则全部拆分
+        Split.MergeCellSplit(excel)
+    data = NestedTree.ReceivePathReturnJSON(excel)
+    return data
 
 
 # POST请求接受excel，Excel为结构化描述符树信息，把Excel转成JSON数据
 @ExcelToJSON_bp.route('/TreeInfo', methods=['POST'])
 def PostTreeInfoToJSON():
-    df = pd.read_excel(request.files['file'])
-    JSON = json.dumps(df)
+    excel = request.files['file']
+    JSON = Info.ReceivePathReturnJSON(excel)
     return JSON
-

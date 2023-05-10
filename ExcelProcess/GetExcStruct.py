@@ -18,7 +18,7 @@ import os
 
 import pandas as pd
 
-from data._init_ import DataPath
+from data import DataPath
 
 
 def GetDataFrame(path, type):
