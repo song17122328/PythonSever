@@ -18,6 +18,8 @@ CORS(app,supports_credentials=True)
 # 导入处理Excel成JSON的蓝图
 from router.ExcelToJSON_router import ExcelToJSON_bp
 from router.MongoDB_router import mongoDB_bp
+from router.ImportanceScore_router import importanceScore_bp
+
 app.register_blueprint(ExcelToJSON_bp)
 app.register_blueprint(mongoDB_bp)
-
+app.register_blueprint(importanceScore_bp)

@@ -7,9 +7,9 @@
 @Date ：2023/5/8 21:30
 """
 
-import MongoDB.ImportMongoDB as mongoDB
+from flask import Blueprint, request
 
-from flask import Blueprint, request, jsonify
+import MongoDB.ImportMongoDB as mongoDB
 
 mongoDB_bp = Blueprint('MongoDB_BP', __name__)
 

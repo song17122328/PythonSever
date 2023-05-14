@@ -1,0 +1,226 @@
+Electronegativity
+Electronegativity of atoms
+Electronegativity of Na
+Electronegativity of M1
+Electronegativity of M2
+Electronegativity of X1
+Electronegativity of X2
+Effective mean element electronegativity
+Effective mean element electronegativity of  M
+Effective mean element electronegativity of  X
+Calculated effective electronegativity according to formula (Na)
+Standard deviation of electronegativity
+Standard deviation of electronegativity in M site
+Standard deviation of electronegativity in X site
+Maximum deviation of electronegativity
+Maximum deviation of electronegativity in M site
+Maximum deviation of electronegativity in X site
+X_m_avg-X_Na
+X_m_avg-X_A
+Polarizability
+Polarizability of atoms
+Polarizability of M1
+Polarizability of M2
+Polarizability of X1
+Polarizability of X2
+Effective mean element polarizability
+Effective mean element polarizability of  M
+Effective mean element polarizability of  X
+Radius
+Radius of atoms
+cation radius
+Radius of Na
+Radius of M1
+Radius of M2
+Radius of X1
+Radius of X2
+Effective mean ionic radius
+Effective mean ionic radius of  M
+Effective mean ionic radius of  X
+Calculated effective ionic radius according to formula (Na)
+Standard deviation of radius
+Standard deviation of radius in M site
+Standard deviation of radius in X site
+Maximum deviation of radius
+Maximum deviation of radius in M site
+Maximum deviation of radius in X site
+R_m_avg/R_Na
+Electric charge
+Valence of atoms
+Valence of  M1
+Valence of  M2
+Valence of  X1
+Valence of  X2
+Effective mean valence
+Effective mean valence of M
+Effective mean valence of X
+Standard deviation of valence
+Standard deviation of  ionic charge states  in M site
+Standard deviation of ionic charge states  in X site
+Maximum deviation of valence
+Maximum deviation of ionic charge states in M site
+Maximum deviation of ionic charge states in X site
+Volume
+Volume of atoms
+Volume of  Na
+Volume of  M1
+Volume of  M2
+Volume of  X1
+Volume of  X2
+Effective mean volume
+Volume per anion
+Calculated effective volume of species D1 according to formula (Na)
+Effective mean volume of M
+Effective mean volume of X
+magnetic
+Ionization energy
+First ionization energy of M1
+First ionization energy of M2
+First ionization energy of X1
+First ionization energy of X2
+Second ionization energy of M1
+Second ionization energy of M2
+Second ionization energy of X1
+Second ionization energy of X2
+Atomic masses
+Mass of atoms
+Mass of M1
+Mass of M2
+Mass of X1
+Mass of X2
+Effective mean mass
+Effective mean mass of  M
+Effective mean mass of  X
+Concentration
+Stoichiometric number of species Na according to formula
+Stoichiometric number of species M according to formula
+Stoichiometric number of species PO4 according to formula
+Stoichiometric number of species X according to formula
+Vacancy occupation
+occupancy of different site
+Occupancy of Na ( 6b )
+Occupancy of Na (18e)
+Occupancy of Na (36f)
+Occupancy of M1
+Occupancy of M2
+Occupancy of  X1
+Occupancy of  X2
+Vacancy of  M
+Vacancy of  X
+Vacancy of  6b
+Vacancy of  18e
+Vacancy of  36f
+Coulomb interaction
+Bond strength
+bond strength of XO
+bond strength of MO
+Standard deviation in Li bond ionicity
+Average Li bond ionicity
+Average bond ionicity of sublattice
+Ratio of average Li bond ionicity to average sublattice bond ionicity
+Bond length
+bond length of XO
+bond length of MO
+Bond angle
+energy
+Ewald summation energy
+Formation energies
+Formation energy of materials
+Vacancy formation energy
+Entropy of migration
+Energy landscapes
+Average electronegativity of sublattice
+Average straight-line path electronegativity
+Lattice parameters
+a
+c
+V
+a/c
+h
+d
+Structure disorder
+configurate entropy
+Configuration entropy of Na (6b)
+Configuration entropy of Na (18e)
+Configuration entropy of Na (36f)
+Configuration entropy of Na (all)
+Configuration entropy of M
+Configuration entropy of X
+Frustration
+Lattice distortion
+Ion arrangement
+packing mode
+Packing fraction
+Packing fraction of full crystal
+Packing fraction of sublattice
+Lattice dynamics
+Lattice softness
+Lattice symmetry
+Debye frequency
+Average phonon band center
+Dielectric constant
+Geometry factor
+Ionic diffusion
+Haven ratio 
+Jump frequency
+Attempt frequency 
+Concerted Migration
+The percentage of the correlated jumps
+All jump events
+Thermal expansion
+Thermal expansion coefficient
+Transition temperature
+Volume effect
+Compressive strain
+Polyhedron Volume
+Polyhedral of MO6
+Polyhedral of XO4
+Polyhedral of Na1O6
+Polyhedral of Na2O8
+Polyhedral of Na3O5
+Distance
+Distance between atoms
+Average shortest anion-anion separation distance
+Average shortest Li-anion separation distance
+Average shortest Li-Li separation distance
+Jump distance 
+Coordination
+Average atomic volume
+Standard deviation in Li neighbor count
+Average Li neighbor count
+Average sublattice neighbor count
+Anion framework coordination
+Average Li-Li bonds per Li
+Ratio of average Li neighbor count to average sublattice neighbor count
+Channel
+Bottleneck
+BT1
+BT2
+Min_BT
+Conduction threshold
+Average straight-line path width
+The dimensionality of diffusion pathways
+The volume of diffusion  pathways
+annealing temperature
+cooling rate
+heat treatment temperature
+Heating rate
+Heating temperatures
+Temperature
+porosity
+Pressure
+Mechanical strength
+Humidity
+
+
+
+
+
+
+
+
+
+
+
+
+
