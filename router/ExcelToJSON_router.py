@@ -15,6 +15,7 @@ import ExcelProcess.NestedTree_ExcelToJSON as NestedTree
 import ExcelProcess.Info_ExcelToJSON as Info
 import MergeCell.MergeCellDetection as Detection
 import MergeCell.MergeCellSplit as Split
+import MongoDB.InitMongoDB
 
 ExcelToJSON_bp = Blueprint('ExcelToJSON_BP', __name__)
 
@@ -29,6 +30,14 @@ def PostTreeStructToJSON():
         Split.MergeCellSplit(excel)
     data = NestedTree.ReceivePathReturnJSON(excel)
     return data
+
+
+@ExcelToJSON_bp.route('/NestedToStructureToMongoDB', methods=['POST'])
+def PostNestedToStructureToMongoDB():
+    data = request.json
+    # 检测是否有合并单元格
+    structured_data_list = NestedTree.convert_nested_Tree_to_structured_list(data)
+    return jsonify(structured_data_list)
 
 
 # POST请求接受excel，Excel为结构化描述符树信息，把Excel转成JSON数据

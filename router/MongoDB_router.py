@@ -17,6 +17,14 @@ mongoDB_bp = Blueprint('MongoDB_BP', __name__)
 @mongoDB_bp.route('/TreeStructData', methods=['POST'])
 def PostTreeStructDataToMongoDB():
     data = request.json
-    mongoDB.InsertMongoDB("TreeStruct",data)
+    mongoDB.InsertMongoDB("TreeStruct", data)
+
+    return "Data received and saved to MongoDB"
+
+
+@mongoDB_bp.route('/TreeInfoData', methods=['POST'])
+def PostTreeInfoDataToMongoDB():
+    data = request.json
+    mongoDB.InsertMongoDB("DescriptorInfo", data)
 
     return "Data received and saved to MongoDB"

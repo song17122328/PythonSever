@@ -55,11 +55,12 @@ def ReadDataAndReturnDitc(data):
             if value not in current_dict:
                 ID = str(uuid.uuid4())
                 # id为独一无二的uuid，对于该namespace_uuid和name下
-                current_dict[value] = {"id": ID, "nodeName": value, "children": {}}
+                current_dict[value] = {"id": ID, "nodeName": value.lower(), "children": {}}
             #     此处把current_dict的地址指向current_dict[value]["children"]的地址，
             #     所以下一个for修改 current_dict[value]，相当于修改current_dict[value]["children"][value]
             current_dict = current_dict[value]["children"]
 
+    # print(current_dict)
     # 给根节点增加"父节点ID"属性
     add_parent_id(root_dict)
 
@@ -122,6 +123,46 @@ def convert_nested_dict_to_structured_data(nested_dict, parent_id=''):
             'ChildrenId': children_ids,
             'ChildrenName': children_names
         })
+
+    return structured_data_list
+
+
+def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
+    """
+    该函数将嵌套的字典数据转化成结构化的数据
+    :param nested_dict: 嵌套的字典数据
+    :param parent_id: 父节点ID，初始值为''
+    :return: 结构化的数据列表，包含id, nodeName, parentID, childrenID, childrenName等属性
+    """
+
+    structured_data_list = []
+    node_id = nested_dict['id']
+    node_name = nested_dict['nodeName']
+    node_type=nested_dict['treeType']
+    children_ids = []
+    children_names = []
+
+    if nested_dict['children'] is not None:
+        for child_value in nested_dict['children']:
+            child_id = child_value['id']
+            child_name = child_value['nodeName']
+            children_ids.append(child_id)
+            children_names.append(child_name)
+            structured_data_list += convert_nested_Tree_to_structured_list(
+                child_value,
+                parent_id=node_id
+            )
+
+    structured_data_list.append({
+        '_id': node_id,
+        'NodeName': node_name,
+        'ParentId': parent_id,
+        'TreeType':node_type,
+        'ChildrenId': children_ids,
+        'ChildrenName': children_names,
+        'from':nested_dict['from']
+
+    })
 
     return structured_data_list
 

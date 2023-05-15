@@ -19,7 +19,9 @@ CORS(app,supports_credentials=True)
 from router.ExcelToJSON_router import ExcelToJSON_bp
 from router.MongoDB_router import mongoDB_bp
 from router.ImportanceScore_router import importanceScore_bp
+from router.RedundancyElimination_router import redundancyElimination_bp
 
 app.register_blueprint(ExcelToJSON_bp)
 app.register_blueprint(mongoDB_bp)
 app.register_blueprint(importanceScore_bp)
+app.register_blueprint(redundancyElimination_bp)

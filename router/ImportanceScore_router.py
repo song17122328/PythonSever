@@ -6,27 +6,27 @@
 @Author ：小小小松
 @Date ：2023/5/14 18:00
 """
-from flask import Blueprint, request, send_from_directory, send_file, make_response
+import json
 
-from ImportanceScore.tf_idf import GetAll,GetScore
+from flask import Blueprint, request, send_file, make_response
+
+from ImportanceScore.tf_idf import ReturnDescriptors, ReturnScore
 
 importanceScore_bp = Blueprint('ImportanceScore_BP', __name__)
 
 
 @importanceScore_bp.route('/TF_IDF_Score', methods=['POST'])
-def PostTF_IDF_Score():
+def PostImportanceDownload():
     data = request.json
-    ScorePath = GetScore(data)
+    AllPath = ReturnScore(data)
     # 创建响应对象
-    response = make_response(send_file(ScorePath, as_attachment=True, mimetype='application/octet-stream'))
+    response = make_response(send_file(AllPath, as_attachment=True, mimetype='application/octet-stream'))
 
     return response
 
 
-@importanceScore_bp.route('/TF_IDF_All', methods=['POST'])
-def PostImportanceDownload():
-    data = request.json
-    AllPath = GetAll(data)
-    return send_from_directory(AllPath, AllPath, as_attachment=True)
-
-
+@importanceScore_bp.route('/TF_IDF_Des', methods=['Get'])
+def GetImportanceDownload():
+    Descriptors = ReturnDescriptors()
+    Descriptors = json.dumps(Descriptors)
+    return Descriptors

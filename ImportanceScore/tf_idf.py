@@ -16,7 +16,7 @@ from datetime import date
 
 
 def GetDescriptors(file):
-    print(file)
+    # print(file)
     list_origin_word_group_ = []
     list_origin_word_group_with_allwords = []
 
@@ -113,7 +113,7 @@ def train(vocabulary, corpus_):
     return df_vocabulary
 
 
-def getImportanceScore(df_vocabulary, list_origin_word_group):
+def getImportanceScore(df_vocabulary, list_origin_word_group, ScorePath):
     # 处理数据
     df_vocabulary.sum()
     # 得到每个单词在所有单词中的权重（softmax）
@@ -149,15 +149,13 @@ def getImportanceScore(df_vocabulary, list_origin_word_group):
     result_excel["描述符"] = key
     result_excel["TF-IDF重要度得分"] = value
     # 写入excel和csv中
-    path = "data/TF-IDF/result_score.xlsx"
-    result_excel.to_excel(path)
-    return path
+    result_excel.to_excel(ScorePath)
 
     # 进一步处理为0，0.5和1分
 
 
-def dividedThreeCategories(excelName, list_origin_word_group_):
-    data = pd.read_excel(excelName)
+def dividedThreeCategories(ScorePath, AllPath):
+    data = pd.read_excel(ScorePath)
     data = data.drop(data.columns[0], axis=1)  # 去除第一列无用的数据  # 去除第一列无用的数据
     # 三分位数
     data_TFIDF = data['TF-IDF重要度得分']
@@ -181,12 +179,11 @@ def dividedThreeCategories(excelName, list_origin_word_group_):
             list_.append(0)
     data_TFIDF_tr = data
     data_TFIDF_tr.insert(2, '三分位数', value=list_)
-    path = "data/TF-IDF/result_all.xlsx"
-    data_TFIDF_tr.to_excel(path)
-    return path
+
+    data_TFIDF_tr.to_excel(AllPath)
 
 
-def GetScore(word):
+def ReturnScore(word):
     """
 
     :rtype: object
@@ -198,25 +195,25 @@ def GetScore(word):
     corpus = readPaper(dirs)
     # vocabulary为接收的描述符
     df_vocabulary = train(vocabulary, corpus)
-    ScorePath = getImportanceScore(df_vocabulary, list_origin_word_group)
-    return ScorePath
-
-
-def GetAll(word):
-    """
-
-    :rtype: object
-    """
-    dirs = "data/TF-IDF/result_literatures"
-    list_origin_word_group_ = GetDescriptors(word)
-    vocabulary, list_origin_word_group = delete_stop_words(list_origin_word_group_=list_origin_word_group_)
-    # 得到语料库
-    corpus = readPaper(dirs)
-    # vocabulary为接收的描述符
-    df_vocabulary = train(vocabulary, corpus)
-    ScorePath = getImportanceScore(df_vocabulary, list_origin_word_group)
-    AllPath = dividedThreeCategories(ScorePath, list_origin_word_group_)
+    ScorePath = "data/TF-IDF/result_score.xlsx"
+    AllPath = "data/TF-IDF/result_all.xlsx"
+    getImportanceScore(df_vocabulary, list_origin_word_group, ScorePath)
+    dividedThreeCategories(ScorePath, AllPath)
     return AllPath
+
+
+def ReturnDescriptors():
+    ScorePath = "data/TF-IDF/result_score.xlsx"
+    data = pd.read_excel(ScorePath)
+    data = data.drop(data.columns[0], axis=1)  # 去除第一列无用的数据  # 去除第一列无用的数据
+    # 三分位数
+    data_TFIDF = data['TF-IDF重要度得分']
+
+    # 上1/3位数
+    a2 = np.percentile(data_TFIDF, 66)
+    data_top = data.loc[data['TF-IDF重要度得分'] > a2]
+    des = data_top['描述符'].values.tolist()
+    return des
 
 
 if __name__ == '__main__':
