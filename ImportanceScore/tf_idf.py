@@ -218,4 +218,3 @@ def ReturnDescriptors():
 
 if __name__ == '__main__':
     words = "data/TF-IDF/descriptors_NEW_drop.txt"
-    GetAll(words)

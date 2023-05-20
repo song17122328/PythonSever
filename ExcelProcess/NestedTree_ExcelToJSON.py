@@ -91,7 +91,7 @@ def convert_dict_to_list(data_dict):
 
 def convert_nested_dict_to_structured_data(nested_dict, parent_id=''):
     """
-    该函数将嵌套的字典数据转化成结构化的数据
+    该函数将嵌套结构的描述符树数据转化成结构化数据的描述符树
     :param nested_dict: 嵌套的字典数据
     :param parent_id: 父节点ID，初始值为''
     :return: 结构化的数据列表，包含id, nodeName, parentID, childrenID, childrenName等属性
@@ -129,7 +129,7 @@ def convert_nested_dict_to_structured_data(nested_dict, parent_id=''):
 
 def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
     """
-    该函数将嵌套的字典数据转化成结构化的数据
+    该函数将嵌套树转化成结构化的数据
     :param nested_dict: 嵌套的字典数据
     :param parent_id: 父节点ID，初始值为''
     :return: 结构化的数据列表，包含id, nodeName, parentID, childrenID, childrenName等属性

@@ -50,9 +50,9 @@ def dataSolve():
     :return:List[List[dict]] 列表包含3个DataFrame转成的dict对象，分别对应 "描述符树结构表.xlsx",'描述符树结构表.xlsx','描述符树结构表.xlsx'
     """
     # 读取 Excel 表格数据
-    dfTreeStruct = pd.read_excel("描述符树结构表.xlsx")
-    dfDescriptorInfo = pd.read_excel('描述符信息表.xlsx')
-    dfMlData = pd.read_excel('机器学习描述符属性值.xlsx',sheet_name="complete information")
+    dfTreeStruct = pd.read_excel("../描述符树结构表.xlsx")
+    dfDescriptorInfo = pd.read_excel('../描述符信息表.xlsx')
+    dfMlData = pd.read_excel('../机器学习描述符属性值.xlsx',sheet_name="complete information")
     # 处理描述符树结构表中的孩子数组
     for i, child in enumerate(dfTreeStruct.ChildArray):
         if child == child:
