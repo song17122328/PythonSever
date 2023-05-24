@@ -23,21 +23,18 @@ def ReceivePathReturnJSON(path):
 
     for (i, name) in enumerate(sheet_names):
         data = df[name].values
-        nested_data, structured_data = ReadDataAndReturnDitc(data)
+        nested_data = ReadDataAndReturnDitc(data, name)
         for key, value in nested_data.items():
-            value["TreeType"] = name
+            value["treeType"] = name
             nested_JSONs.append(value)
             structured_JSONs.append([])
-            for node in structured_data:
-                node["TreeType"] = name
-                structured_JSONs[i].append(node)
 
-    dictData = {"nested_JSON": nested_JSONs, "structured_JSON": structured_JSONs}
+    dictData = {"nested_JSON": nested_JSONs}
     dictData = json.dumps(dictData)
     return dictData
 
 
-def ReadDataAndReturnDitc(data):
+def ReadDataAndReturnDitc(data, type):
     """
     该函数读取一个excel文件，并返回符合要求的嵌套的JSON数据
     :param path: 输入excel的路径
@@ -55,21 +52,21 @@ def ReadDataAndReturnDitc(data):
             if value not in current_dict:
                 ID = str(uuid.uuid4())
                 # id为独一无二的uuid，对于该namespace_uuid和name下
-                current_dict[value] = {"id": ID, "nodeName": value.lower(), "children": {}}
+                current_dict[value] = {"id": ID, "nodeName": str(value).lower(), "children": {}, "score": 0,
+                                       'treeType': type}
             #     此处把current_dict的地址指向current_dict[value]["children"]的地址，
             #     所以下一个for修改 current_dict[value]，相当于修改current_dict[value]["children"][value]
             current_dict = current_dict[value]["children"]
-
-    # print(current_dict)
+    print(root_dict)
     # 给根节点增加"父节点ID"属性
     add_parent_id(root_dict)
-
+    print(root_dict)
     # print(root_dict)
-    structured_data = convert_nested_dict_to_structured_data(root_dict)
+
     # 把字典类型的数据转成符合要求的嵌套数据
     nested_data = convert_dict_to_list(root_dict)
 
-    return nested_data, structured_data
+    return nested_data
 
 
 def add_parent_id(dic, parent_id=""):
@@ -89,44 +86,6 @@ def convert_dict_to_list(data_dict):
     return data_dict
 
 
-def convert_nested_dict_to_structured_data(nested_dict, parent_id=''):
-    """
-    该函数将嵌套结构的描述符树数据转化成结构化数据的描述符树
-    :param nested_dict: 嵌套的字典数据
-    :param parent_id: 父节点ID，初始值为''
-    :return: 结构化的数据列表，包含id, nodeName, parentID, childrenID, childrenName等属性
-    """
-
-    structured_data_list = []
-
-    for key, value in nested_dict.items():
-        node_id = value['id']
-        node_name = value['nodeName']
-        children_ids = []
-        children_names = []
-
-        for child_key, child_value in value['children'].items():
-            child_id = child_value['id']
-            child_name = child_value['nodeName']
-            children_ids.append(child_id)
-            children_names.append(child_name)
-
-            structured_data_list += convert_nested_dict_to_structured_data(
-                {child_key: child_value},
-                parent_id=node_id
-            )
-
-        structured_data_list.append({
-            '_id': node_id,
-            'NodeName': node_name,
-            'ParentId': parent_id,
-            'ChildrenId': children_ids,
-            'ChildrenName': children_names
-        })
-
-    return structured_data_list
-
-
 def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
     """
     该函数将嵌套树转化成结构化的数据
@@ -138,7 +97,9 @@ def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
     structured_data_list = []
     node_id = nested_dict['id']
     node_name = nested_dict['nodeName']
-    node_type=nested_dict['treeType']
+    print("nested_dict：", nested_dict)
+    node_type = nested_dict['treeType']
+    node_score = nested_dict['score']
     children_ids = []
     children_names = []
 
@@ -157,10 +118,10 @@ def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
         '_id': node_id,
         'NodeName': node_name,
         'ParentId': parent_id,
-        'TreeType':node_type,
+        'TreeType': node_type,
         'ChildrenId': children_ids,
         'ChildrenName': children_names,
-        'from':nested_dict['from']
+        "Score": node_score
 
     })
 

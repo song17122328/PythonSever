@@ -35,9 +35,12 @@ def PostTreeStructToJSON():
 @ExcelToJSON_bp.route('/NestedToStructureToMongoDB', methods=['POST'])
 def PostNestedToStructureToMongoDB():
     data = request.json
-    # 检测是否有合并单元格
-    structured_data_list = NestedTree.convert_nested_Tree_to_structured_list(data)
-    return jsonify(structured_data_list)
+    res = list()
+    if isinstance(data,list):
+        for i in data:
+            res.append(NestedTree.convert_nested_Tree_to_structured_list(i))
+    # structured_data_list = NestedTree.convert_nested_Tree_to_structured_list(data)
+    return jsonify(res)
 
 
 # POST请求接受excel，Excel为结构化描述符树信息，把Excel转成JSON数据
