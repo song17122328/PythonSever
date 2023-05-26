@@ -18,5 +18,12 @@ redundancyElimination_bp = Blueprint('re_bp', __name__)
 def redundancy_elimination():
     data = request.json
     ResDict = Detection(data)
+    res = []
+    for i in ResDict.keys():
+        print(ResDict[i]['isRepeat'])
+        if ResDict[i]['isRepeat']:
+            res.append(ResDict[i])
+    print(res)
+    # print(jsonify(ResDict))
     # jsonify 是 Flask 提供的用于生成带有正确 MIME 类型和 HTTP 头部的 JSON 响应对象的简便函数。
     return jsonify(ResDict)

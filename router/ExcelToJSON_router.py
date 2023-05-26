@@ -39,7 +39,8 @@ def PostNestedToStructureToMongoDB():
     if isinstance(data,list):
         for i in data:
             res.append(NestedTree.convert_nested_Tree_to_structured_list(i))
-    # structured_data_list = NestedTree.convert_nested_Tree_to_structured_list(data)
+    else:
+        res = NestedTree.convert_nested_Tree_to_structured_list(data)
     return jsonify(res)
 
 
