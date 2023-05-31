@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-@Intorduce：把excel文件转成json
+@Introduce：基于嵌套化定义的描述符树构建—从Excel提取描述符树
 @Project ：_init_.py 
 @File ：NestedTree_ExcelToJSON.py
 @Author ：小小小松
@@ -42,9 +42,9 @@ def ReadDataAndReturnDitc(data, type):
     """
 
     root_dict = {}
-    # 以下这个for循环堪称我遇到的最牛B的代码，出自chatGPT
     for row in data:
-        # current_dict指针指向root_dict的同一块地址单元，之后修改current_dict的值，就相当于修改root_dict的孩子的值。
+        # current_dict指针指向root_dict的同一块地址单元，之后修改current_dict的值，
+        # 就相当于修改root_dict的孩子的值。
         current_dict = root_dict
         for value in row:
             if value != value:
@@ -52,7 +52,8 @@ def ReadDataAndReturnDitc(data, type):
             if value not in current_dict:
                 ID = str(uuid.uuid4())
                 # id为独一无二的uuid，对于该namespace_uuid和name下
-                current_dict[value] = {"id": ID, "nodeName": str(value).lower(), "children": {}, "score": 0,
+                current_dict[value] = {"id": ID, "nodeName": str(value).lower(),
+                                       "children": {}, "score": 0,
                                        'treeType': type}
             #     此处把current_dict的地址指向current_dict[value]["children"]的地址，
             #     所以下一个for修改 current_dict[value]，相当于修改current_dict[value]["children"][value]
@@ -122,9 +123,7 @@ def convert_nested_Tree_to_structured_list(nested_dict, parent_id=''):
         'ChildrenId': children_ids,
         'ChildrenName': children_names,
         "Score": node_score
-
     })
-
     return structured_data_list
 
 

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-@Intorduce：冗余检测
+@Introduce：冗余检测
 @Project ：PythonSever 
 @File ：Detection.py
 @Author ：小小小松
@@ -39,7 +39,8 @@ def find_duplicate_nodes(node, duplicates, deep=1, seen=None, path=None, ):
         "childrenNum": 0 if node.get("children", []) is None else len(node.get("children", []))})
     if node.get("children", []) is not None:
         for child in node.get("children", []):
-            find_duplicate_nodes(node=child, duplicates=duplicates, deep=deep + 1, seen=seen, path=node_path)
+            find_duplicate_nodes(node=child, duplicates=duplicates,
+                                 deep=deep + 1, seen=seen, path=node_path)
 
 
 def Detection(data):
