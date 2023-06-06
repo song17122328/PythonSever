@@ -50,15 +50,17 @@ def GetFormula_Score():
     return jsonify(res)
 
 
-@importanceScore_bp.route('/RePic', methods=['GET'])
+@importanceScore_bp.route('/RePic', methods=['POST'])
 def GetRePic():
-    RePic()
+    data = request.json
+    RePic(data)
     # 返回JSON格式的数据
     return jsonify(True)
 
 
-@importanceScore_bp.route('/BingPic', methods=['GET'])
+@importanceScore_bp.route('/BingPic', methods=['POST'])
 def GetBingPic():
-    BingPic()
+    data = request.json
+    BingPic(data)
     # 返回JSON格式的数据
     return jsonify(True)

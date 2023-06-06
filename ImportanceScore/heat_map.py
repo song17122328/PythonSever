@@ -13,13 +13,17 @@ import matplotlib.pyplot as plt
 import textwrap
 
 
-def createRePic():
+def createRePic(data):
+    print(data)
     # 读取Excel文件
-    df = pd.read_excel('data/各描述符得分及综合评分(排序).xlsx')
-    descriptor = df['Descriptor']
-    score = df['Score']
+    # df = pd.read_excel('data/各描述符得分及综合评分(排序).xlsx')
     descriptorData = []
     scoreData = []
+    descriptor = []
+    score = []
+    for res in data:
+        descriptor.append(res['Descriptor'])
+        score.append(res['Score'])
     for i in range(40):
         tempDesp = []
         tempScore = []
@@ -48,4 +52,4 @@ def createRePic():
     ax.set_xticks([])
     ax.set_yticks([])
 
-    plt.savefig('D:/yxs/课程/大四/毕设/WorkCode/frontend-xai-base/src/assets/Score_Heatmap.png', dpi=300)
+    plt.savefig('../frontend-xai-base/src/assets/Score_Heatmap.png', dpi=300)

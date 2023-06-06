@@ -49,23 +49,11 @@ def dataSolve():
 
     :return:List[List[dict]] 列表包含3个DataFrame转成的dict对象，分别对应 "描述符树结构表.xlsx",'描述符树结构表.xlsx','描述符树结构表.xlsx'
     """
-    # 读取 Excel 表格数据
-    dfTreeStruct = pd.read_excel("../描述符树结构表.xlsx")
-    dfDescriptorInfo = pd.read_excel('../描述符信息表.xlsx')
-    dfMlData = pd.read_excel('../机器学习描述符属性值.xlsx',sheet_name="complete information")
-    # 处理描述符树结构表中的孩子数组
-    for i, child in enumerate(dfTreeStruct.ChildArray):
-        if child == child:
-            child = child.replace("'", '').replace("[", '').replace("]", '')
-            dfTreeStruct.ChildArray[i] = child.split(', ')
-        else:
-            dfTreeStruct.ChildArray[i] = None
 
-    # 将数据转换为字典格式，存入结果集
-    StructRes = dfTreeStruct.to_dict('records')
-    InfoRes = dfDescriptorInfo.to_dict('records')
+    dfMlData = pd.read_excel('../机器学习描述符属性值.xlsx',sheet_name="complete information")
+
     MLDataRes = dfMlData.to_dict('records')
-    return [StructRes, InfoRes, MLDataRes]
+    return [MLDataRes]
 
 
 if __name__ == '__main__':

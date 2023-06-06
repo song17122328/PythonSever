@@ -9,9 +9,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def createBingPic():
+
+def createBingPic(data):
     # 读取Excel文件
-    df = pd.read_excel('data/各描述符得分及综合评分(排序).xlsx')
+    df = pd.DataFrame(data)
+    print(df)
 
     # 根据Score进行分组
     grouped = df.groupby('Score')['Descriptor'].apply(list)
@@ -42,4 +44,5 @@ def createBingPic():
         text.set_fontsize(10)
 
     # 导出图片
-    plt.savefig('D:/yxs/课程/大四/毕设/WorkCode/frontend-xai-base/src/assets/pie_chart.png', dpi=800)
+
+    plt.savefig('../frontend-xai-base/src/assets/pie_chart.png', dpi=800)
